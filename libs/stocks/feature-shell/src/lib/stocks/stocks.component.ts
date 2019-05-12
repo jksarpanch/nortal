@@ -5,7 +5,8 @@ import { ITimePeriod } from './stocks.interface';
 
 @Component({
   selector: 'coding-challenge-stocks',
-  templateUrl: './stocks.component.html'
+  templateUrl: './stocks.component.html',
+  styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit, ITimePeriod {
   stockPickerForm: FormGroup;
@@ -33,7 +34,9 @@ export class StocksComponent implements OnInit, ITimePeriod {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.stockPickerForm.valueChanges.subscribe(this.fetchQuote);
+  }
 
   fetchQuote = () => {
     if (this.stockPickerForm.valid) {

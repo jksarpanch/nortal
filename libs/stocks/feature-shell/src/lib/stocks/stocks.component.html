@@ -1,4 +1,4 @@
-<form [formGroup]="stockPickerForm">
+<form [formGroup]="stockPickerForm" [style.width]="'50%'">
   <mat-form-field>
     <input
       matInput
@@ -21,34 +21,6 @@
         {{ timePeriod.viewValue }}
       </mat-option>
     </mat-select>
-  </mat-form-field>
-
-
-  <mat-form-field class="date-picker-custom">
-    <input matInput [matDatepicker]="picker" placeholder="From Date" formControlName="dateFrom"/>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error>
-      <span *ngIf="!stockPickerForm.get('dateFrom').valid">
-        Please enter date
-      </span>
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field class="date-picker-custom">
-    <input matInput [matDatepicker]="picker1" placeholder="To Date" formControlName="dateTo" [max]="todaysDate"
-           [min]="stockPickerForm?.value?.dateFrom"/>
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
-    <mat-error>
-      <span *ngIf="!stockPickerForm.get('dateTo').valid && !stockPickerForm.get('dateTo').value">
-        Please enter date
-      </span>
-    </mat-error>
-    <mat-error>
-      <span *ngIf="stockPickerForm.errors && stockPickerForm.get('dateTo').value">
-        {{ stockPickerForm.errors?.dates | json }}
-      </span>
-    </mat-error>
   </mat-form-field>
 
 

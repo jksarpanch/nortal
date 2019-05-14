@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -9,6 +9,7 @@ import {
   priceQueryReducer,
   PRICEQUERY_FEATURE_KEY
 } from './+state/price-query.reducer';
+import { CacheInterceptor } from './cache.interceptor';
 
 @NgModule({
   imports: [
@@ -17,6 +18,8 @@ import {
     StoreModule.forFeature(PRICEQUERY_FEATURE_KEY, priceQueryReducer),
     EffectsModule.forFeature([PriceQueryEffects])
   ],
-  providers: [PriceQueryFacade]
+  providers: [PriceQueryFacade,
+    {provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true}
+  ]
 })
 export class StocksDataAccessPriceQueryModule {}
